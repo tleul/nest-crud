@@ -18,10 +18,10 @@ import config from './config/keys';
 //     price:'5'
 //   }
 // ]
-console.log(config.mongoUri);
+
 @Module({
   imports: [ProductsModule, MongooseModule.forRoot(config.mongoUri)],
-  controllers: [AppController, ProductsController],
-  providers: [AppService, ProductsService, UsersService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

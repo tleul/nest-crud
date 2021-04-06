@@ -12,33 +12,23 @@ import {
 import { get } from 'node:http';
 import { AddProductDto } from './dto/addProduct.products.dto';
 import { UpdateProductsDto } from './dto/updateProduct.products.dto';
+import { Product } from './products.schema';
 import { ProductsService } from './products.service';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
+  @Post()
+  create(@Body() createProduct: AddProductDto): Promise<Product> {
+    return this.productsService.createProduct(createProduct);
+  }
   @Get()
-  getAllProducts() {
+  get() {
     return this.productsService.getAllProducts();
   }
-  @Post()
-  addProduct(@Body() completedProduct: AddProductDto) {
-    return this.productsService.createProduct(completedProduct);
-  }
-  @Patch(':id')
-  updateProduct(
-    @Param('id') id: number,
-    @Body() updateProduct: UpdateProductsDto,
-  ) {
-    return this.productsService.updateProducts(id, updateProduct);
-  }
-  @Get(':id')
-  getProduct(@Param('id') id: number) {
-    return this.productsService.getProduct(id);
-  }
   @Delete(':id')
-  deletProduct(@Param('id') id: number) {
+  delete(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);
   }
 }

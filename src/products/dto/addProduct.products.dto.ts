@@ -3,7 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNumber, Length } from 'class-validator';
 
 export class AddProductDto {
-  id: number;
   @ApiProperty({ description: 'Testing ' })
   @IsString({ message: 'Produt Title can not be empty' })
   @Length(2, 20)

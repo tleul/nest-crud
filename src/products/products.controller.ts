@@ -31,4 +31,16 @@ export class ProductsController {
   delete(@Param('id') id: string) {
     return this.productsService.deleteProduct(id);
   }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body()
+    updateProduct: UpdateProductsDto,
+  ): Promise<Product> {
+    return this.productsService.updateProducts(id, updateProduct);
+  }
+  @Get(':id')
+  getProduct(@Param('id') id: string) {
+    return this.productsService.getProduct(id);
+  }
 }

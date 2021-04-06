@@ -16,36 +16,28 @@ export class ProductsService {
     let product = await this.productModel.find();
     return product;
   }
-  async createProduct(createProduct: AddProductDto) {
+  async createProduct(createProduct: AddProductDto): Promise<Product> {
     let product = new this.productModel(createProduct);
     product.save();
     return product;
-    // let id = 1;
-    // if (this.products.length > 0) {
-    //   id = this.products[this.products.length - 1].id + 1;
-    // }
-    // createProduct.id = id;
-    // this.products.push(createProduct);
-    // return this.products;
   }
   async deleteProduct(id: string) {
     let product = await this.productModel.findByIdAndDelete(id);
     return product;
-    // let product = this.products.filter((item) => item.id !== id);
-    // this.products = product;
-    // return this.products;
   }
-  updateProducts(id: number, updateProduct: UpdateProductsDto) {
-    // let product = this.findProduct(id);
-    // let index = this.products.findIndex((item) => item.id === id);
-    // this.products[index] = {
-    //   ...product,
-    //   ...updateProduct,
-    // };
-    // return this.products;
+  async updateProducts(
+    id: string,
+    updateProduct: UpdateProductsDto,
+  ): Promise<Product> {
+    let product = await this.productModel.findByIdAndUpdate(id, updateProduct, {
+      new: true,
+    });
+
+    return product;
   }
-  getProduct(id: number) {
-    //  return this.findProduct(id);
+  async getProduct(id: string): Promise<Product> {
+    let product = await this.productModel.findById(id);
+    return product;
   }
 
   private findProduct(id: number) {

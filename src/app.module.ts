@@ -5,6 +5,8 @@ import { ProductsController } from './products/products.controller';
 import { ProductsService } from './products/products.service';
 import { ProductsModule } from './products/products.module';
 import { UsersService } from './users/users.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import config from './config/keys';
 
 // let products = [
 //   {
@@ -16,9 +18,9 @@ import { UsersService } from './users/users.service';
 //     price:'5'
 //   }
 // ]
-
+console.log(config.mongoUri);
 @Module({
-  imports: [ProductsModule],
+  imports: [ProductsModule, MongooseModule.forRoot(config.mongoUri)],
   controllers: [AppController, ProductsController],
   providers: [AppService, ProductsService, UsersService],
 })
